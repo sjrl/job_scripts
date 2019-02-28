@@ -12,8 +12,7 @@ import argparse
 import os
 import subprocess
 import sys
-sys.path.insert(0,'/home/sjlee/scripts/executableScripts')
-from fchk import fileCheck
+from fchk import file_check
 
 
 # FIXME Needs to be modified to be able to delete folders I specify as well
@@ -55,7 +54,7 @@ def jclean(**kwargs):
     # Clean only failed jobs starting at current directory or specified directory from path
     elif failed_jobs:
         print_info = False
-        list_of_sucess, list_of_failure, run_dict = fileCheck(dir_name,print_info)
+        list_of_sucess, list_of_failure, run_dict = file_check(dir_name,print_info)
 
         if len(list_of_failure) == 0:
             print('0 failed jobs detected.')

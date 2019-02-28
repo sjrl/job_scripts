@@ -12,7 +12,7 @@ import os
 import sys
 import fnmatch
 
-def fileCheck(dir_name,print_info):
+def file_check(dir_name,print_info):
 
     list_of_success = []
     list_of_failure = []
@@ -131,4 +131,4 @@ def fileCheck(dir_name,print_info):
 
 if __name__ == "__main__":
     print_info=True
-    fileCheck(sys.argv[1],print_info)
+    file_check(sys.argv[1],print_info)
