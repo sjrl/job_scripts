@@ -30,7 +30,7 @@ def file_check(dir_name,print_info):
 
             # Check to see if there is a batch file present.
             # This means a job is meant to be run in this folder.
-            if filename[-5:] == 'batch':
+            if filename[-5:] == 'batch' and 'template' not in filename:
 
                 run_dict[dirpath] = filename
 
