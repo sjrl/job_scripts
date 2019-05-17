@@ -64,37 +64,15 @@ def file_check(dir_name,print_info):
 
                                 lastFields = lines.split()
                                 if len(lastFields) == 3 and lastFields[0] == "Variable" and lastFields[1] == "memory" and lastFields[2] == "released":
-                                    #list_of_success.append(lastFolder)
                                     list_of_success.append(dirpath)
                                 elif len(lastFields) >= 3 and lastFields[0] == "Molpro" and lastFields[1] == "calculation" and lastFields[2] == "terminated":
-                                    #list_of_success.append(lastFolder)
                                     list_of_success.append(dirpath)
                                 else:
-                                    #list_of_failure.append(lastFolder)
                                     list_of_failure.append(dirpath)
 
-                        # For geometric jobs
-                        elif f == 'progress.txt':
-
-                            output_detected=True
-
-                            # "with" places the opened object into file1 for use in the nested block of commmands
-                            with open(os.path.join(dirpath,f),'r') as file1:
-
-                                # This loop passes every line. The last value of lines will the be the last line in the file.
-                                for lc,lines in enumerate(file1):
-                                    pass
-
-                                lastFields = lines.split()
-                                if lastFields[0] == 'Converged!':
-                                    #list_of_success.append(lastFolder)
-                                    list_of_success.append(dirpath)
-                                else:
-                                    #list_of_failure.append(lastFolder)
-                                    list_of_failure.append(dirpath)
+                    # No output files detected
                     if not output_detected:
-                        # No output files detected
-                            list_of_failure.append(dirpath)
+                        list_of_failure.append(dirpath)
 
     if (print_info):
         # Print info about the different states of the jobs
@@ -110,18 +88,22 @@ def file_check(dir_name,print_info):
         print('')
 
         # Print amount of failed jobs
+        list_of_folders = {x.split('/')[1] for x in list_of_failure}
         print('List of Failure:')
         if len(list_of_failure) > 100:
             print(str(len(list_of_failure))+' jobs failed.')
+            print(list_of_folders)
         else:
             print(str(len(list_of_failure))+' jobs failed.')
             print(list_of_failure)
         print('')
 
         # Print jobs that still need to be submitted
+        list_of_folders = {x.split('/')[1] for x in run_dict}
         print('Jobs that need to be submitted:')
         if len(run_dict) > 100:
             print(str(len(run_dict))+' jobs need to be run.')
+            print(list_of_folders)
         else:
             print(str(len(run_dict))+' jobs need to be run.')
             print(run_dict)
